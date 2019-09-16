@@ -22,8 +22,7 @@ namespace NewsSite.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
+            ViewBag.Message = "Наші контакти";
             return View();
         }
     }
