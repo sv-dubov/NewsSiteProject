@@ -156,6 +156,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -163,11 +164,19 @@
     <Compile Include="Migrations\201909161508368_Add tables.Designer.cs">
       <DependentUpon>201909161508368_Add tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909161656410_Add Roles.cs" />
+    <Compile Include="Migrations\201909161656410_Add Roles.Designer.cs">
+      <DependentUpon>201909161656410_Add Roles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationContext.cs" />
+    <Compile Include="Models\ApplicationRole.cs" />
+    <Compile Include="Models\ApplicationRoleManager.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ApplicationUserManager.cs" />
+    <Compile Include="Models\CreateRoleModel.cs" />
     <Compile Include="Models\EditModel.cs" />
+    <Compile Include="Models\EditRoleModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -214,6 +223,9 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Roles\Index.cshtml" />
+    <Content Include="Views\Roles\Create.cshtml" />
+    <Content Include="Views\Roles\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -234,6 +246,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201909161508368_Add tables.resx">
       <DependentUpon>201909161508368_Add tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909161656410_Add Roles.resx">
+      <DependentUpon>201909161656410_Add Roles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
