@@ -91,10 +91,68 @@ namespace NewsSite.Controllers
             ViewBag.returnUrl = returnUrl;
             return View(model);
         }
+
         public ActionResult Logout()
         {
             AuthenticationManager.SignOut();
             return RedirectToAction("Login");
+        }
+
+        [HttpGet]
+        public ActionResult Delete()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public async Task<ActionResult> DeleteConfirmed()
+        {
+            ApplicationUser user = await UserManager.FindByEmailAsync(User.Identity.Name);
+            if (user != null)
+            {
+                IdentityResult result = await UserManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Logout", "Account");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<ActionResult> Edit()
+        {
+            ApplicationUser user = await UserManager.FindByEmailAsync(User.Identity.Name);
+            if (user != null)
+            {
+                EditModel model = new EditModel { Year = user.Year };
+                return View(model);
+            }
+            return RedirectToAction("Login", "Account");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(EditModel model)
+        {
+            ApplicationUser user = await UserManager.FindByEmailAsync(User.Identity.Name);
+            if (user != null)
+            {
+                user.Year = model.Year;
+                IdentityResult result = await UserManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Здається, трапилася халепа...");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Користувач не знайдений");
+            }
+            return View(model);
         }
     }
 }
